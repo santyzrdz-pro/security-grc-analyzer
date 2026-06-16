@@ -2,14 +2,38 @@
 
 > Automated cybersecurity **compliance**, **risk management**, and **NIST 800‑53 control‑mapping** platform.
 
+![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688?logo=fastapi&logoColor=white)
+![Next.js](https://img.shields.io/badge/Next.js-15-000000?logo=nextdotjs&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-06B6D4?logo=tailwindcss&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?logo=postgresql&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)
+![License](https://img.shields.io/badge/License-Portfolio-blue)
+
 ControlMap AI ingests technical security findings, automatically maps them to NIST SP 800‑53 controls, scores risk, maintains a risk register, tracks remediation, scores compliance, and generates audit‑ready reports — with an AI Security Analyst that translates technical findings into business language.
 
 It is built to look and feel like a commercial GRC SaaS product (Drata / Vanta / Secureframe / Wiz style), with a dark, responsive UI.
 
 ---
 
+## Screenshots
+
+> Capture these from the running app (`http://localhost:3000`) and drop the PNGs into [`docs/screenshots/`](docs/screenshots) using the filenames below — they will render automatically. See [`docs/screenshots/README.md`](docs/screenshots/README.md) for tips.
+
+| Executive Dashboard | Findings + AI Analyst |
+|---|---|
+| ![Executive Dashboard](docs/screenshots/dashboard.png) | ![Findings and AI analysis](docs/screenshots/findings.png) |
+
+| Automatic Control Mapping | Compliance Scoring |
+|---|---|
+| ![Control mapping engine](docs/screenshots/mapping.png) | ![Compliance scoring](docs/screenshots/compliance.png) |
+
+---
+
 ## Table of contents
 
+- [Screenshots](#screenshots)
 - [Features](#features)
 - [Tech stack](#tech-stack)
 - [Architecture](#architecture)
