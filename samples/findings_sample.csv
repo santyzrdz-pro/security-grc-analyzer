@@ -1,0 +1,6 @@
+title,description,severity,status,source,cve,asset,detection_date,evidence
+TLS 1.0 Enabled,Legacy TLS 1.0 protocol is enabled on the load balancer.,Medium,Open,Qualys,,prod-web-01,2026-05-20,SSL Labs grade B
+Default SNMP Community String,Network device uses the default 'public' SNMP community string.,High,Open,Manual Review,,corp-fw-01,2026-05-22,snmpwalk -c public succeeded
+Unpatched Apache Struts,Application server runs a version of Apache Struts vulnerable to RCE.,Critical,Open,Nessus,CVE-2017-5638,billing-app,2026-05-25,Struts 2.3.31 detected
+Excessive admin privileges on workstation,A finance user holds local administrator rights without business justification.,High,In Progress,CIS-CAT,,finance-workstation-12,2026-05-28,net localgroup administrators
+No centralized log review,Database server logs are not forwarded to a SIEM and are never reviewed.,Medium,Open,Manual Review,,prod-db-01,2026-06-01,No SIEM forwarder configured

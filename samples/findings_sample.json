@@ -1,0 +1,32 @@
+{
+  "findings": [
+    {
+      "title": "Firewall rule allows any-any inbound",
+      "description": "Perimeter firewall contains an overly permissive any-any inbound rule exposing internal services.",
+      "severity": "Critical",
+      "status": "Open",
+      "source": "Firewall Audit",
+      "asset": "corp-fw-01",
+      "detection_date": "2026-06-03",
+      "evidence": "Rule #12: src any dst any allow"
+    },
+    {
+      "title": "Password policy allows reuse",
+      "description": "Domain policy permits reuse of the last password, weakening authenticator management.",
+      "severity": "Medium",
+      "status": "Open",
+      "source": "Manual Review",
+      "asset": "finance-workstation-12",
+      "detection_date": "2026-06-05"
+    },
+    {
+      "title": "MFA disabled for VPN",
+      "description": "Remote access VPN allows single-factor authentication for all users.",
+      "severity": "High",
+      "status": "Open",
+      "source": "Access Review",
+      "asset": "billing-app",
+      "detection_date": "2026-06-07"
+    }
+  ]
+}
