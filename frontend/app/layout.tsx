@@ -3,7 +3,7 @@ import "./globals.css";
 import { Providers } from "./providers";
 
 export const metadata: Metadata = {
-  title: "ControlMap AI",
+  title: "Security Compliance & Risk Management Analyzer",
   description:
     "Automated cybersecurity compliance, risk management, and NIST 800-53 control-mapping platform.",
 };

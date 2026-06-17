@@ -86,7 +86,9 @@ def _table(data: list[list[str]], col_widths: list[float] | None = None) -> Tabl
     return table
 
 
-def generate_audit_report(db: Session, generated_by: str = "ControlMap AI") -> bytes:
+def generate_audit_report(
+    db: Session, generated_by: str = "Security Compliance & Risk Management Analyzer"
+) -> bytes:
     styles = _styles()
     buf = io.BytesIO()
     doc = SimpleDocTemplate(
@@ -96,15 +98,17 @@ def generate_audit_report(db: Session, generated_by: str = "ControlMap AI") -> b
         bottomMargin=18 * mm,
         leftMargin=16 * mm,
         rightMargin=16 * mm,
-        title="ControlMap AI - Audit Report",
+        title="Security Compliance & Risk Audit Report",
     )
     story: list = []
     now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
 
     # ---- Cover ----
     story.append(Spacer(1, 60))
-    story.append(Paragraph("ControlMap AI", styles["CMTitle"]))
-    story.append(Paragraph("Security Compliance &amp; Risk Audit Report", styles["CMSection"]))
+    story.append(
+        Paragraph("Security Compliance &amp; Risk Management Analyzer", styles["CMTitle"])
+    )
+    story.append(Paragraph("Audit Report", styles["CMSection"]))
     story.append(Spacer(1, 8))
     story.append(Paragraph(f"Generated: {now}", styles["CMSub"]))
     story.append(Paragraph(f"Prepared by: {generated_by}", styles["CMSub"]))

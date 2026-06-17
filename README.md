@@ -1,6 +1,6 @@
-# ControlMap AI
+# Security Compliance & Risk Management Analyzer
 
-> Automated cybersecurity **compliance**, **risk management**, and **NIST 800‑53 control‑mapping** platform.
+> Automated cybersecurity **GRC** platform for **compliance**, **risk management**, and **NIST 800‑53 control‑mapping**.
 
 ![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688?logo=fastapi&logoColor=white)
@@ -11,7 +11,7 @@
 ![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)
 ![License](https://img.shields.io/badge/License-Portfolio-blue)
 
-ControlMap AI ingests technical security findings, automatically maps them to NIST SP 800‑53 controls, scores risk, maintains a risk register, tracks remediation, scores compliance, and generates audit‑ready reports — with an AI Security Analyst that translates technical findings into business language.
+The **Security Compliance & Risk Management Analyzer** ingests technical security findings, automatically maps them to NIST SP 800‑53 controls, scores risk, maintains a risk register, tracks remediation, scores compliance, and generates audit‑ready reports — with an AI Security Analyst that translates technical findings into business language.
 
 It is built to look and feel like a commercial GRC SaaS product (Drata / Vanta / Secureframe / Wiz style), with a dark, responsive UI.
 
@@ -290,7 +290,7 @@ For each finding the platform produces an **Executive Summary**, **Business Impa
 ## Project structure
 
 ```
-ControlMap AI/
+security-grc-analyzer/
 ├── docker-compose.yml
 ├── .env.example
 ├── README.md

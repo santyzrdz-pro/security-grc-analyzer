@@ -40,8 +40,10 @@ export function Sidebar() {
           <ShieldCheck className="h-5 w-5 text-primary" />
         </div>
         <div>
-          <p className="text-sm font-bold leading-tight text-foreground">ControlMap</p>
-          <p className="text-[10px] font-medium uppercase tracking-wider text-primary">AI</p>
+          <p className="text-sm font-bold leading-tight text-foreground">GRC Analyzer</p>
+          <p className="text-[10px] font-medium uppercase tracking-wider text-primary">
+            Compliance &amp; Risk
+          </p>
         </div>
       </div>
 

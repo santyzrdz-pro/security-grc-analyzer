@@ -43,7 +43,7 @@ def generate_report(
     pdf_bytes = generate_audit_report(db, generated_by=current.full_name)
 
     report = Report(
-        title="ControlMap AI Audit Report",
+        title="Security Compliance & Risk Audit Report",
         report_type="Audit",
         summary=f"Compliance {compliance.compliance_percentage}% (Grade {compliance.grade})",
         compliance_score=compliance.compliance_percentage,
@@ -57,7 +57,7 @@ def generate_report(
         content=pdf_bytes,
         media_type="application/pdf",
         headers={
-            "Content-Disposition": 'attachment; filename="controlmap-audit-report.pdf"'
+            "Content-Disposition": 'attachment; filename="security-grc-audit-report.pdf"'
         },
     )
 

@@ -1,4 +1,4 @@
-"""ControlMap AI - FastAPI application entrypoint."""
+"""Security Compliance & Risk Management Analyzer - FastAPI application entrypoint."""
 from __future__ import annotations
 
 import logging

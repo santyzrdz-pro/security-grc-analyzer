@@ -1,4 +1,4 @@
-# ControlMap AI — Architecture
+# Security Compliance & Risk Management Analyzer — Architecture
 
 ## System context
 

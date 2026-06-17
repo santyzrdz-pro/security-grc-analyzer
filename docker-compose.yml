@@ -1,7 +1,7 @@
 services:
   db:
     image: postgres:16-alpine
-    container_name: controlmap_db
+    container_name: grc_analyzer_db
     restart: unless-stopped
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-controlmap}
@@ -21,7 +21,7 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: controlmap_backend
+    container_name: grc_analyzer_backend
     restart: unless-stopped
     depends_on:
       db:
@@ -46,7 +46,7 @@ services:
       dockerfile: Dockerfile
       args:
         NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8000}
-    container_name: controlmap_frontend
+    container_name: grc_analyzer_frontend
     restart: unless-stopped
     depends_on:
       - backend

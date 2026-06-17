@@ -11,7 +11,7 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
     # Project
-    PROJECT_NAME: str = "ControlMap AI"
+    PROJECT_NAME: str = "Security Compliance & Risk Management Analyzer"
     API_V1_PREFIX: str = "/api/v1"
     VERSION: str = "1.0.0"
 

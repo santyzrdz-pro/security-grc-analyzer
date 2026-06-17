@@ -43,7 +43,7 @@ export default function ReportsPage() {
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = "controlmap-audit-report.pdf";
+      a.download = "security-grc-audit-report.pdf";
       document.body.appendChild(a);
       a.click();
       a.remove();
