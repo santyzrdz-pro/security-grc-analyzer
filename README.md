@@ -39,8 +39,8 @@ It is built to look and feel like a commercial GRC SaaS product (Drata / Vanta /
 - [Architecture](#architecture)
 - [Quick start (Docker)](#quick-start-docker)
 - [Local development](#local-development)
-- [Demo accounts](#demo-accounts)
-- [RBAC permission matrix](#rbac-permission-matrix)
+- [Using your own data](#using-your-own-data)
+- [Optional: enable login & RBAC](#optional-enable-login--rbac)
 - [API overview](#api-overview)
 - [Database schema](#database-schema)
 - [The mapping & risk engines](#the-mapping--risk-engines)
@@ -115,7 +115,7 @@ flowchart LR
     AI -.optional.-> OAI
 ```
 
-Request lifecycle: the browser authenticates via `/auth/login`, stores the JWT, and every request carries `Authorization: Bearer`. FastAPI validates the token, resolves the user + role, and enforces a capability check before the route runs. Business logic lives in `app/services/`, keeping routers thin.
+Request lifecycle: the browser calls the FastAPI backend directly (no login by default). Business logic lives in `app/services/`, keeping routers thin.
 
 See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for the data model and engine diagrams.
 
@@ -142,7 +142,7 @@ Then open:
 | OpenAPI JSON | http://localhost:8000/api/v1/openapi.json |
 | Health check | http://localhost:8000/health |
 
-On first boot the backend **creates the schema and seeds demo data** (NIST controls, assets, findings auto‑mapped to controls, risks, remediation tasks). Set `SEED_ON_STARTUP=false` in `.env` to disable.
+On first boot the backend **creates the schema and seeds the NIST 800-53 control library** (required for automatic mapping). Demo assets/findings are **off by default** — import your own CSV instead. Set `SEED_DEMO_DATA=true` in `.env` to load sample data.
 
 > The AI Security Analyst works **without** an API key using a deterministic local fallback. To use real OpenAI output, set `OPENAI_API_KEY` in `.env`.
 
@@ -174,20 +174,41 @@ npm run dev
 
 ---
 
-## Demo accounts
+## Using your own data
 
-| Role | Email | Password |
-|------|-------|----------|
-| Admin | `admin@controlmap.ai` | `Admin123!` |
-| Security Analyst | `analyst@controlmap.ai` | `Analyst123!` |
-| Auditor | `auditor@controlmap.ai` | `Auditor123!` |
-| Executive | `exec@controlmap.ai` | `Exec123!` |
+The app opens straight to the dashboard — no login required.
 
-The login screen has one‑click buttons to fill each demo account. Admin credentials are configurable via `ADMIN_EMAIL` / `ADMIN_PASSWORD`.
+1. **(Optional) Add assets** on the Assets page (servers, apps, databases, etc.).
+2. Go to **Findings → Import CSV** (or Import JSON).
+3. Use a CSV with these columns (see `samples/findings_sample.csv`):
+
+| Column | Required | Notes |
+|--------|:--------:|-------|
+| `title` | ✅ | Finding title |
+| `description` | | Technical detail |
+| `severity` | | `Critical`, `High`, `Medium`, `Low`, `Info` |
+| `status` | | `Open`, `In Progress`, `Resolved`, `Accepted` |
+| `source` | | e.g. Nessus, Qualys, manual review |
+| `cve` | | CVE ID if applicable |
+| `asset` | | Matched by name to an existing asset (optional) |
+| `detection_date` | | `YYYY-MM-DD` |
+| `evidence` | | Audit evidence text |
+
+Imported findings are **automatically mapped to NIST 800-53 controls** and get AI analysis (local fallback if no OpenAI key). Use **Mapping Engine** to re-run mapping, **Risk Register** for scored risks, and **Reports** to download a PDF audit pack.
 
 ---
 
-## RBAC permission matrix
+## Optional: enable login & RBAC
+
+By default `AUTH_ENABLED=false` for a simpler single-user experience. To restore multi-user login with Admin / Analyst / Auditor / Executive roles, set in `.env`:
+
+```env
+AUTH_ENABLED=true
+ADMIN_EMAIL=admin@example.com
+ADMIN_PASSWORD=YourSecurePassword
+```
+
+Then re-enable the login flow in the frontend (see git history). The backend RBAC permission matrix remains available when auth is enabled:
 
 | Capability | Admin | Analyst | Auditor | Executive |
 |------------|:-----:|:-------:|:-------:|:---------:|
@@ -200,8 +221,6 @@ The login screen has one‑click buttons to fill each demo account. Admin creden
 | Reports read / generate | ✅ / ✅ | ✅ / ✅ | ✅ / ❌ | ✅ / ✅ |
 | Users management | ✅ | ❌ | ❌ | ❌ |
 | Audit logs | ✅ | ❌ | ✅ | ❌ |
-
-The sidebar navigation and action buttons adapt to the signed‑in role.
 
 ---
 
@@ -313,7 +332,7 @@ security-grc-analyzer/
 └── frontend/
     ├── Dockerfile
     ├── package.json
-    ├── app/               # App Router pages (login + (app) group)
+    ├── app/               # App Router pages ((app) group — no login)
     ├── components/        # sidebar, ui primitives, charts
     └── lib/               # api client, auth context, types
 ```

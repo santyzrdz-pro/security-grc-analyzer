@@ -41,11 +41,7 @@ ROLE_DESCRIPTIONS = {
     RoleName.EXECUTIVE: "Dashboards and reports only.",
 }
 
-DEMO_USERS = [
-    ("analyst@controlmap.ai", "Alex Analyst", RoleName.ANALYST, "Analyst123!"),
-    ("auditor@controlmap.ai", "Olivia Auditor", RoleName.AUDITOR, "Auditor123!"),
-    ("exec@controlmap.ai", "Evan Executive", RoleName.EXECUTIVE, "Exec123!"),
-]
+DEMO_USERS: list[tuple[str, str, RoleName, str]] = []
 
 
 def seed_roles(db: Session) -> dict[str, Role]:
@@ -63,17 +59,18 @@ def seed_roles(db: Session) -> dict[str, Role]:
     return roles
 
 
-def seed_users(db: Session, roles: dict[str, Role]) -> None:
+def seed_system_user(db: Session, roles: dict[str, Role]) -> None:
     admin_email = settings.ADMIN_EMAIL.lower()
     if not db.scalar(select(User).where(User.email == admin_email)):
         db.add(
             User(
                 email=admin_email,
-                full_name="Platform Administrator",
+                full_name="System",
                 hashed_password=hash_password(settings.ADMIN_PASSWORD),
                 role_id=roles[RoleName.ADMIN.value].id,
             )
         )
+        db.commit()
     for email, name, role_name, password in DEMO_USERS:
         if not db.scalar(select(User).where(User.email == email)):
             db.add(
@@ -197,15 +194,16 @@ def seed_remediations(db: Session, findings: dict[str, Finding]) -> None:
     db.commit()
 
 
-def run_seed(db: Session, with_demo: bool = True) -> None:
-    logger.info("Seeding roles and users...")
+def run_seed(db: Session, with_demo: bool = False) -> None:
+    logger.info("Seeding roles and system user...")
     roles = seed_roles(db)
-    seed_users(db, roles)
-    if not with_demo:
-        return
+    seed_system_user(db, roles)
     logger.info("Seeding NIST controls...")
     seed_controls(db)
-    logger.info("Seeding assets, findings, risks, remediations...")
+    if not with_demo:
+        logger.info("Seed complete (no demo data).")
+        return
+    logger.info("Seeding demo assets, findings, risks, remediations...")
     assets = seed_assets(db)
     findings = seed_findings(db, assets)
     seed_risks(db, findings)

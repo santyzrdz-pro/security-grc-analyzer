@@ -20,7 +20,8 @@ class Settings(BaseSettings):
     # external services. Docker Compose overrides this with a PostgreSQL URL.
     DATABASE_URL: str = "sqlite:///./controlmap.db"
 
-    # Security
+    # Security (login disabled by default for a simpler single-user experience)
+    AUTH_ENABLED: bool = False
     JWT_SECRET_KEY: str = "change-me-in-production"
     JWT_ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
@@ -28,10 +29,12 @@ class Settings(BaseSettings):
     # CORS
     BACKEND_CORS_ORIGINS: list[str] = ["http://localhost:3000"]
 
-    # Bootstrap admin
-    ADMIN_EMAIL: str = "admin@controlmap.ai"
-    ADMIN_PASSWORD: str = "Admin123!"
+    # Internal system user for audit logs when auth is disabled
+    ADMIN_EMAIL: str = "system@local"
+    ADMIN_PASSWORD: str = "unused"
     SEED_ON_STARTUP: bool = True
+    # Load sample assets/findings/risks on startup (off by default — use your own CSV)
+    SEED_DEMO_DATA: bool = False
 
     # Rate limiting
     RATE_LIMIT: str = "200/minute"

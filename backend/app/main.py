@@ -50,7 +50,7 @@ async def lifespan(app: FastAPI):
 
         db = SessionLocal()
         try:
-            run_seed(db, with_demo=True)
+            run_seed(db, with_demo=settings.SEED_DEMO_DATA)
         except Exception as exc:  # noqa: BLE001
             logger.exception("Seeding failed: %s", exc)
         finally:

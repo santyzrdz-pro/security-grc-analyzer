@@ -27,13 +27,6 @@ export class ApiError extends Error {
 }
 
 async function handle(res: Response) {
-  if (res.status === 401) {
-    clearToken();
-    if (typeof window !== "undefined" && !window.location.pathname.includes("/login")) {
-      window.location.href = "/login";
-    }
-    throw new ApiError(401, "Unauthorized");
-  }
   if (!res.ok) {
     let detail = `Request failed (${res.status})`;
     try {
