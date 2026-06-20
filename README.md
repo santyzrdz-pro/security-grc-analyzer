@@ -17,23 +17,8 @@ It is built to look and feel like a commercial GRC SaaS product (Drata / Vanta /
 
 ---
 
-## Screenshots
-
-> Capture these from the running app (`http://localhost:3000`) and drop the PNGs into [`docs/screenshots/`](docs/screenshots) using the filenames below — they will render automatically. See [`docs/screenshots/README.md`](docs/screenshots/README.md) for tips.
-
-| Executive Dashboard | Findings + AI Analyst |
-|---|---|
-| ![Executive Dashboard](docs/screenshots/dashboard.png) | ![Findings and AI analysis](docs/screenshots/findings.png) |
-
-| Automatic Control Mapping | Compliance Scoring |
-|---|---|
-| ![Control mapping engine](docs/screenshots/mapping.png) | ![Compliance scoring](docs/screenshots/compliance.png) |
-
----
-
 ## Table of contents
 
-- [Screenshots](#screenshots)
 - [Features](#features)
 - [Tech stack](#tech-stack)
 - [Architecture](#architecture)
